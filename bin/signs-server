@@ -1,0 +1,44 @@
+#!/usr/bin/env node
+var loge = require('loge');
+var database = require('../database');
+var server = require('../server');
+
+var yargs = require('yargs')
+  .usage('Usage: signs-server --port 1098')
+  .describe({
+    uploads: 'directory to store uploads',
+    hostname: 'hostname to listen on',
+    port: 'port to listen on',
+    help: 'print this help message',
+    verbose: 'print extra output',
+    version: 'print version',
+  })
+  .boolean(['help', 'verbose', 'version'])
+  .alias({
+    p: 'port',
+    u: 'uploads',
+  })
+  .demand(['uploads'])
+  .default({
+    hostname: process.env.HOSTNAME || '127.0.0.1',
+    port: parseInt(process.env.PORT, 10) || 80,
+    verbose: process.env.DEBUG !== undefined,
+  });
+
+var argv = yargs.argv;
+loge.logger.level = argv.verbose ? loge.Level.debug : loge.Level.info;
+
+if (argv.help) {
+  yargs.showHelp();
+}
+else if (argv.version) {
+  console.log(require('../package').version);
+}
+else {
+  process.env.UPLOADS_PATH = argv.uploads;
+  database.initialize(function(err) {
+    if (err) throw err;
+    loge.logger.debug('Initialized database');
+    server.listen(argv.port, argv.hostname);
+  });
+}

@@ -1,0 +1,34 @@
+{
+  "name": "signs-server",
+  "version": "0.0.0",
+  "description": "Signs server",
+  "keywords": [
+    "signs",
+    "server"
+  ],
+  "homepage": "https://github.com/chbrown/signs-server",
+  "repository": "git://github.com/chbrown/signs-server.git",
+  "author": "Christopher Brown <io@henrian.com> (http://henrian.com)",
+  "license": "MIT",
+  "dependencies": {
+    "async": "*",
+    "http-enhanced": "*",
+    "lodash": "*",
+    "loge": "*",
+    "regex-router": "*",
+    "request": "*",
+    "send": "*",
+    "signs": "chbrown/signs",
+    "sqlcmd-pg": "*",
+    "yargs": "*"
+  },
+  "devDependencies": {
+    "typescript": "*"
+  },
+  "bin": {
+    "signs-server": "bin/signs-server"
+  },
+  "scripts": {
+    "start": "node bin/signs-server"
+  }
+}
