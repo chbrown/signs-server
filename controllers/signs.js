@@ -60,17 +60,29 @@ R.post(/^\/signs$/, function (req, res) {
             });
         },
         sign: function (callback) {
-            database_1.db.InsertOne('sign')
-                .set({
-                gloss: req.headers['x-sign-gloss'],
-                description: req.headers['x-sign-description'],
+            var token = req.headers['x-token'] || '';
+            // try to authenticate the contributor
+            database_1.db.SelectOne('contributor INNER JOIN session ON session.contributor_id = contributor.id')
+                .add('contributor.*')
+                .whereEqual({
+                token: token,
             })
-                .returning('*')
-                .execute(function (error, sign) {
+                .execute(function (error, contributor) {
                 if (error)
                     return callback(error);
-                console.log('inserted sign: %j', sign);
-                callback(null, sign);
+                database_1.db.InsertOne('sign')
+                    .set({
+                    gloss: req.headers['x-sign-gloss'],
+                    description: req.headers['x-sign-description'],
+                    contributor_id: contributor ? contributor.id : 0,
+                })
+                    .returning('*')
+                    .execute(function (error, sign) {
+                    if (error)
+                        return callback(error);
+                    console.log('inserted sign: %j', sign);
+                    callback(null, sign);
+                });
             });
         },
     }, function (error, _a) {

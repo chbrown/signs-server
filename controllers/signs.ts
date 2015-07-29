@@ -68,18 +68,30 @@ R.post(/^\/signs$/, (req, res: any) => {
       });
     },
     sign: (callback) => {
-      db.InsertOne('sign')
-      .set({
-        gloss: req.headers['x-sign-gloss'],
-        description: req.headers['x-sign-description'],
+      var token = req.headers['x-token'] || '';
+      // try to authenticate the contributor
+      db.SelectOne('contributor INNER JOIN session ON session.contributor_id = contributor.id')
+      .add('contributor.*')
+      .whereEqual({
+        token: token,
       })
-      .returning('*')
-      .execute((error: Error, sign: any) => {
+      .execute((error: Error, contributor) => {
         if (error) return callback(error);
 
-        console.log('inserted sign: %j', sign);
+        db.InsertOne('sign')
+        .set({
+          gloss: req.headers['x-sign-gloss'],
+          description: req.headers['x-sign-description'],
+          contributor_id: contributor ? contributor.id : 0,
+        })
+        .returning('*')
+        .execute((error: Error, sign: any) => {
+          if (error) return callback(error);
 
-        callback(null, sign);
+          console.log('inserted sign: %j', sign);
+
+          callback(null, sign);
+        });
       });
     },
   }, (error, {images, sign}) => {
