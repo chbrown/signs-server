@@ -1,5 +1,5 @@
 BIN := node_modules/.bin
-DTS := node/node async/async
+DTS := async/async lodash/lodash node/node
 
 all: type_declarations
 type_declarations: $(DTS:%=type_declarations/DefinitelyTyped/%.d.ts)
