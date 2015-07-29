@@ -1,7 +1,8 @@
 CREATE TABLE contributor (
   id SERIAL PRIMARY KEY,
-  email TEXT NOT NULL,
+  email TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL,
+
   created TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT current_timestamp
 );
 

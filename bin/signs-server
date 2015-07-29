@@ -7,6 +7,7 @@ var yargs = require('yargs')
   .usage('Usage: signs-server --port 1098')
   .describe({
     uploads: 'directory to store uploads',
+    salt: 'salt for password hashing',
     hostname: 'hostname to listen on',
     port: 'port to listen on',
     help: 'print this help message',
@@ -21,6 +22,7 @@ var yargs = require('yargs')
   .demand(['uploads'])
   .default({
     hostname: process.env.HOSTNAME || '127.0.0.1',
+    salt: 'yxo3rZccy90rS7GphnuGqw0JSpdeLbDN',
     port: parseInt(process.env.PORT, 10) || 80,
     verbose: process.env.DEBUG !== undefined,
   });
@@ -36,6 +38,7 @@ else if (argv.version) {
 }
 else {
   process.env.UPLOADS_PATH = argv.uploads;
+  process.env.SALT = argv.salt;
   database.initialize(function(err) {
     if (err) throw err;
     loge.logger.debug('Initialized database');

@@ -2,16 +2,17 @@
 var http = require('http-enhanced');
 import {logger} from 'loge';
 
-import controllers = require('./controllers/index');
+var indexController = require('./controllers/index');
 
 var server = http.createServer((req, res) => {
   logger.debug('%s %s', req.method, req.url);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', '*');
-  controllers(req, res);
+  indexController(req, res);
 });
 server.on('listening', () => {
   var address = server.address();
   logger.info(`server listening on http://${address.address}:${address.port}`);
 });
+
 export = server;
