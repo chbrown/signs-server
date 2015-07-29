@@ -112,6 +112,7 @@ R.delete(/^\/signs\/(\d+)$/, (req, res, m: RegExpMatchArray) => {
   .where('session.contributor_id = contributor.id')
   .where('sign.contributor_id = contributor.id')
   .whereEqual({
+    'sign.id': m[1],
     token: token,
   })
   .execute((error: Error, sign) => {
