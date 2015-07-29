@@ -30,8 +30,12 @@ var R = new Router();
 R.get(/^\/signs(\?|$)/, function (req, res) {
     var urlObj = url.parse(req.url, true);
     var query = database_1.db.Select('sign INNER JOIN contributor ON contributor.id = sign.contributor_id')
-        .add('sign.id', 'sign.gloss', 'sign.description', 'contributor.email')
+        .add('sign.id', 'sign.gloss', 'sign.description', 'sign.contributor_id', 'contributor.email')
         .orderBy('sign.created DESC');
+    if (urlObj.query.q) {
+        var like_term = "%" + urlObj.query.q + "%";
+        query = query.where('(gloss ILIKE ?) OR (description ILIKE ?)', like_term, like_term);
+    }
     var limit = Math.min(parseInt(urlObj.query.limit || 100, 10), 100);
     query = query.limit(limit);
     query.execute(function (error, signs) {
