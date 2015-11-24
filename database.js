@@ -1,4 +1,3 @@
-/// <reference path="type_declarations/index.d.ts" />
 var path_1 = require('path');
 var loge_1 = require('loge');
 var sqlcmd = require('sqlcmd-pg');

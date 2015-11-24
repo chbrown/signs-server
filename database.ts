@@ -1,4 +1,3 @@
-/// <reference path="type_declarations/index.d.ts" />
 import {join} from 'path';
 import {logger} from 'loge';
 var sqlcmd = require('sqlcmd-pg');

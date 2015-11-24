@@ -26,7 +26,8 @@
     "yargs": "*"
   },
   "devDependencies": {
-    "typescript": "*"
+    "declarations": "*",
+    "typescript": "next"
   },
   "bin": {
     "signs-server": "bin/signs-server"

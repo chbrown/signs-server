@@ -1,2 +1,6 @@
 Makefile
-*.ts
+controllers/contributors.ts
+controllers/index.ts
+controllers/signs.ts
+database.ts
+server.ts

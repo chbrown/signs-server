@@ -1,7 +1,6 @@
-/// <reference path="../type_declarations/index.d.ts" />
 import {join} from 'path';
 import {logger} from 'loge';
-import Router = require('regex-router');
+import Router from 'regex-router';
 
 var send = require('send');
 

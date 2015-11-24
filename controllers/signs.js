@@ -1,10 +1,9 @@
-/// <reference path="../type_declarations/index.d.ts" />
 var path_1 = require('path');
 var url = require('url');
 var fs_1 = require('fs');
 var zlib_1 = require('zlib');
 var child_process_1 = require('child_process');
-var Router = require('regex-router');
+var regex_router_1 = require('regex-router');
 var database_1 = require('../database');
 // async.d.ts isn't quite up to snuff for what I need
 var async = require('async');
@@ -26,7 +25,7 @@ function storeMovie(jpegs, framerate, webm_filepath, callback) {
         console.log('finished writing stdin');
     });
 }
-var R = new Router();
+var R = new regex_router_1.default();
 R.get(/^\/signs(\?|$)/, function (req, res) {
     var urlObj = url.parse(req.url, true);
     var query = database_1.db.Select('sign INNER JOIN contributor ON contributor.id = sign.contributor_id')

@@ -1,10 +1,9 @@
-/// <reference path="../type_declarations/index.d.ts" />
 import {join} from 'path';
 import * as url from 'url';
 import {createReadStream} from 'fs';
 import {inflate} from 'zlib';
 import {spawn, execFile} from 'child_process';
-import Router = require('regex-router');
+import Router from 'regex-router';
 
 import {db} from '../database';
 

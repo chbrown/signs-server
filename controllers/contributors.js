@@ -1,7 +1,6 @@
-/// <reference path="../type_declarations/index.d.ts" />
 var lodash = require('lodash');
 var crypto_1 = require('crypto');
-var Router = require('regex-router');
+var regex_router_1 = require('regex-router');
 var database_1 = require('../database');
 function hashPassword(email, password) {
     var shasum = crypto_1.createHash('sha256');
@@ -32,7 +31,7 @@ function findOrCreateContributor(email, password, callback) {
             .execute(callback);
     });
 }
-var R = new Router();
+var R = new regex_router_1.default();
 /**
 POST /contributors
 

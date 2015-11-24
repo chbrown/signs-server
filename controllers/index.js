@@ -1,11 +1,10 @@
-/// <reference path="../type_declarations/index.d.ts" />
 var path_1 = require('path');
-var Router = require('regex-router');
+var regex_router_1 = require('regex-router');
 var send = require('send');
 var package_json = require('../package.json');
 var contributorsController = require('./contributors');
 var signsController = require('./signs');
-var R = new Router();
+var R = new regex_router_1.default();
 R.any(/^\/contributors/, contributorsController);
 R.any(/^\/signs/, signsController);
 R.get(/^\/ui(\?|$)/, function (req, res) {

@@ -1,8 +1,7 @@
-/// <reference path="../type_declarations/index.d.ts" />
 import * as lodash from 'lodash';
 import {logger} from 'loge';
 import {createHash} from 'crypto';
-import Router = require('regex-router');
+import Router from 'regex-router';
 
 import {db} from '../database';
 
