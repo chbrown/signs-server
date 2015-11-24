@@ -9,7 +9,7 @@
   "homepage": "https://github.com/chbrown/signs-server",
   "repository": {
     "type": "git",
-    "url": "https://github.com/chbrown/signs-server"
+    "url": "https://github.com/chbrown/signs-server.git"
   },
   "author": "Christopher Brown <io@henrian.com> (http://henrian.com)",
   "license": "MIT",
